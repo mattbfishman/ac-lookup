@@ -4,11 +4,14 @@
   "private": false,
   "dependencies": {
     "classnames": "^2.2.6",
-    "fish-ui-ac": "^0.1.1",
+    "fish-ui-ac": "^0.1.10",
+    "lodash": "^4.17.15",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.2.0",
+    "redux": "^4.0.5",
     "styled-components": "^5.0.1",
     "styled-icons": "^10.2.1",
     "yarn": "^1.19.2"

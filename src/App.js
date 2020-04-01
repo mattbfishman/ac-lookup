@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import Search from 'fish-ui-ac/dist/Form/Search/SearchField';
-import Table from 'fish-ui-ac/dist/Table/Table';
+import CardWrapper from './components/CardWrapper';
+import SearchWrapper from './components/SearchWrapper';
+import FilterWrapper from './components/FilterWrapper';
+import './app.scss';
 
 class App extends Component {
     render(){
         return( 
             <div>
-                <Search/>
+                <SearchWrapper/>
+                <FilterWrapper/>
+                <CardWrapper/>
             </div>
         );
     }

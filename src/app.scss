@@ -1,0 +1,39 @@
+.search-container{
+    margin-bottom: 20px;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-container{
+    margin: 20px;
+    &.fish{
+        background: #95e7ff;
+        border-color: #006684;
+    }
+    &.misc{
+        background: #ff9292;
+        border-color: #900c0c;
+    }
+}
+
+.search-wrapper{
+    width: 100%;
+    height: 50px;
+}
+
+
+.filter-display{
+    margin: auto;
+}
+
+.filter-container{
+    text-align: center;
+}
+
+html{
+    font-family: sans-serif;
+}
