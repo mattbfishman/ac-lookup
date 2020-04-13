@@ -1,4 +1,3 @@
-import {items} from '../data/items.js';
 import {Fish} from '@styled-icons/fa-solid/Fish';
 import {Spider} from '@styled-icons/fa-solid/Spider';
 import {Gift} from '@styled-icons/fa-solid/Gift';
@@ -26,7 +25,7 @@ function getTypeLogo(type){
     return <Gift/>;
 }
 
-function getCardItems(filter){
+function getCardItems(items, filter){
     var returnItems = [],
         filtered    = filter || false,
         searchFilter= filter && filter.search || false, 

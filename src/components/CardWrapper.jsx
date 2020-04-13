@@ -2,15 +2,39 @@ import React, {Component} from 'react';
 import helpers from '../helpers/helpers.js';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
+import axios from "axios";
+
 var getCardItem = helpers.getCardItems;
 
 class CardWrapper extends Component {
     constructor(props){
         super(props);
         this.state = {
-            cards:  getCardItem(),
+            cards:  [],
+            cardArray: [],
             filters: {}
         }
+    }
+
+    componentWillMount(){
+        axios({
+          method: "get",
+          url: "/items"
+        })
+        .then(response => {
+            if (response.status === 200) {
+                let items = response.data;
+                if(items && items.length){
+                    this.setState({
+                        cardArray:items,
+                        cards:getCardItem(items)
+                    });
+                }
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     shouldComponentUpdate(nextProps, nextState){
@@ -22,6 +46,7 @@ class CardWrapper extends Component {
             textFilter      = nextProps && nextProps.searchFilter,
             typeFilter      = nextProps && nextProps.filter,
             cards           = state && {...state.cards},
+            cardsArray      = state && {...state.cardArray},
             shouldUpdate    = false;
     
         if(searchFilter !== textFilter){
@@ -34,22 +59,20 @@ class CardWrapper extends Component {
         }
 
         if(shouldUpdate){
-            cards = getCardItem(filter);
+            cards = getCardItem(cardsArray, filter);
             this.setState({
                 filter: filter,
                 cards: cards
             });
         }
         return true;
-        return false;
-
     }
 
     render(){
         var me              = this,
             state           = me && me.state,
             cards           = state && state.cards;
-            
+
         return(
             <div className="cards">
                 {cards}
