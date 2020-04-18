@@ -1,3 +1,4 @@
 export const navItems = [
-    "Add Item"
-];
+    {path: "/", label: "Home"},
+    {path: "/add", label:"Add"}
+]

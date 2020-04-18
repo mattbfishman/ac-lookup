@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import CardWrapper from './components/CardWrapper';
 import SearchWrapper from './components/SearchWrapper';
 import FilterWrapper from './components/FilterWrapper';
@@ -9,15 +10,23 @@ import navLogo from './images/navlogo.png';
 import './app.scss';
 
 class App extends Component {
-
     render(){
         return( 
+          <Router>
             <div>
-                <Navbar logo={navLogo} navItems={navItems} />
-                <SearchWrapper/>
-                <FilterWrapper/>
-                <CardWrapper/>
+              <Switch>
+                <Route path="/add">
+                  <Navbar logo={navLogo} navItems={navItems} />
+                </Route>
+                <Route path="/">
+                  <Navbar logo={navLogo} navItems={navItems} />
+                  <SearchWrapper/>
+                  <FilterWrapper/>
+                  <CardWrapper/>
+                </Route>
+              </Switch>
             </div>
+          </Router>
         );
     }
 }

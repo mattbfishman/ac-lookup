@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 import axios from "axios";
 
-var getCardItem = helpers.getCardItems;
+var getCardItem     = helpers.getCardItems;
 
 class CardWrapper extends Component {
     constructor(props){
