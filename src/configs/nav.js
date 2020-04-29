@@ -1,4 +1,4 @@
 export const navItems = [
     {path: "/", label: "Home"},
-    {path: "/add", label:"Add"}
+    {path: "/add", label:"Add "}
 ]

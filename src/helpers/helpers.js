@@ -30,12 +30,14 @@ function getCardItems(items, filter){
         filtered    = filter || false,
         searchFilter= filter && filter.search || false, 
         typeFilter  = filter && !isObjectEmpty(filter.types) && filter.types || false,
+        isPending   = true,
         shouldAdd, type, typeLogo, title;
 
     forEach(items, function(item){
         type = item.type.toLowerCase();
         typeLogo = getTypeLogo(type);
         title = item.title || '';
+        isPending = item.isPending;
         shouldAdd = true;
         if(filtered){
             if(typeFilter && !typeFilter[type]){
@@ -45,8 +47,8 @@ function getCardItems(items, filter){
                 shouldAdd = false;
             }
         }
-            
-        if(shouldAdd){
+        
+        if(shouldAdd && !isPending){
             returnItems.push(
                 <Card key={title} title={title} typeLogo={typeLogo} type={type} price={item.price} />,
             )
