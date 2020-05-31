@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import helpers from '../helpers/helpers.js';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
-import axios from "axios";
+import {requests} from '../helpers/constants.js';
 
-var getCardItem     = helpers.getCardItems;
+var getCardItem     = helpers.getCardItems,
+    makeRequest     = helpers.makeRequest,
+    GET             = requests.GET;
 
 class CardWrapper extends Component {
     constructor(props){
@@ -16,25 +18,14 @@ class CardWrapper extends Component {
         }
     }
 
-    componentWillMount(){
-        axios({
-          method: "get",
-          url: "/items"
-        })
-        .then(response => {
-            if (response.status === 200) {
-                let items = response.data;
-                if(items && items.length){
-                    this.setState({
-                        cardArray:items,
-                        cards:getCardItem(items)
-                    });
-                }
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    async componentWillMount(){
+        let items = await makeRequest(GET, "/items");
+        if(items && items.length){
+            this.setState({
+                cardArray:items,
+                cards:getCardItem(items)
+            });
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState){

@@ -4,10 +4,12 @@ import {Gift} from '@styled-icons/fa-solid/Gift';
 import Card from 'fish-ui-ac/dist/Card/Card';
 import React from 'react';
 import forEach from 'lodash/forEach';
-import {typeConstants} from './constants.js';
+import {typeConstants, requests} from './constants.js';
+import axios from "axios";
 
 var FISH    = typeConstants.FISH,
-    INSECT  = typeConstants.INSECT;
+    INSECT  = typeConstants.INSECT,
+    GET     = requests.GET;
 
 function isObjectEmpty(obj){
     if(obj){
@@ -61,6 +63,39 @@ function getCardItems(items, filter){
     );    
 }
 
+async function makeRequest(type, url){
+    if(url){
+        if(type === GET){
+            return await getRequest(url);
+        }
+        else{
+            return false;
+        }
+    }  
+    return false;
+}
+
+function getRequest(url){
+    return new Promise(resolve => {
+        axios({
+            method: GET,
+            url: url
+        })
+        .catch(error => {
+            resolve(false);
+        })
+        .then(response => {
+            if (response && response.status === 200) {
+                let data = response.data;
+                if(data){
+                    resolve(data);
+                }
+            }
+        });
+    })
+}
+
 export default {
-    getCardItems: getCardItems
+    getCardItems: getCardItems,
+    makeRequest : makeRequest
 };
