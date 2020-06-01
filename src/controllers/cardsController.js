@@ -8,7 +8,6 @@ exports.cards = async (req, res) => {
             acItems.push(item);
         }).then(function(){
             res.send(acItems);
-
         });
     } catch(err){
         console.log(err);

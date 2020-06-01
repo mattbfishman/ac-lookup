@@ -1,9 +1,14 @@
-const express = require('express')
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-var MongoClient = require('mongodb').MongoClient;
 const port = 3001;
-
 const routes = require("../routes/index");
+var MongoClient = require('mongodb').MongoClient;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
 app.use("/", routes);
 
 // catch 404 and forward to error handler

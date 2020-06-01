@@ -6,7 +6,7 @@
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "express": "^4.17.1",
-    "fish-ui-ac": "^0.1.13",
+    "fish-ui-ac": "^0.1.15",
     "lodash": "^4.17.15",
     "mongodb": "^3.5.6",
     "node-sass": "^4.14.0",

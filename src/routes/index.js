@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const cardController = require("../controllers/cardsController");
+const addController = require("../controllers/addController");
 
 // const usersController = require("../controllers/usersController");
 // usersController routes
@@ -12,7 +13,7 @@ const cardController = require("../controllers/cardsController");
 // router.post("/updateProfileImage", usersController.updateImage);
 router.get("/items", cardController.cards);
 
+router.post("/add", addController.add);
 
-// router.get('/test', (req, res) => (res.send('Hello Worldjhbhj!'), console.log("HERE")))
 module.exports = router;
 

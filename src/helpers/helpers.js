@@ -9,7 +9,8 @@ import axios from "axios";
 
 var FISH    = typeConstants.FISH,
     INSECT  = typeConstants.INSECT,
-    GET     = requests.GET;
+    GET     = requests.GET,
+    POST    = requests.POST;
 
 function isObjectEmpty(obj){
     if(obj){
@@ -63,16 +64,34 @@ function getCardItems(items, filter){
     );    
 }
 
-async function makeRequest(type, url){
+async function makeRequest(type, url, data){
     if(url){
         if(type === GET){
             return await getRequest(url);
         }
         else{
-            return false;
+            return await postRequest(url, data);
         }
     }  
     return false;
+}
+
+function postRequest(url, data){
+    return new Promise(resolve => {
+        axios({
+            method: POST,
+            url: url,
+            data: data
+        })
+        .catch(error => {
+            resolve(false);
+        })
+        .then(response => {
+            if (response && response.status === 200) {
+                resolve(true);
+            }
+        });
+    })
 }
 
 function getRequest(url){
