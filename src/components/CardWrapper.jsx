@@ -18,7 +18,12 @@ class CardWrapper extends Component {
         }
     }
 
-    async componentWillMount(){
+    componentDidMount(){
+        var me = this;
+        me.getInitCards();
+    }
+    
+    async getInitCards(){
         let items = await makeRequest(GET, "/items");
         if(items && items.length){
             this.setState({
