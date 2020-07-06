@@ -4,6 +4,7 @@ import CardWrapper from './components/CardWrapper';
 import SearchWrapper from './components/SearchWrapper';
 import FilterWrapper from './components/FilterWrapper';
 import AddFormWrapper from './components/AddFormWrapper';
+import AdminWrapper from './components/AdminWrapper';
 import Navbar from 'fish-ui-ac/dist/Navbar/Navbar';
 import {navItems} from './configs/nav';
 import navLogo from './images/navlogo.png';
@@ -19,6 +20,9 @@ class App extends Component {
                 <Route path="/add">
                   <Navbar logo={navLogo} navItems={navItems} />
                   <AddFormWrapper header={"Add Item"} />
+                </Route>
+                <Route path="/admin">
+                  <AdminWrapper />
                 </Route>
                 <Route path="/">
                   <Navbar logo={navLogo} navItems={navItems} />
