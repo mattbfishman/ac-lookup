@@ -88,7 +88,10 @@ function postRequest(url, data){
         })
         .then(response => {
             if (response && response.status === 200) {
-                resolve(true);
+                let data = response.data;
+                if(data){
+                    resolve(data);
+                }
             }
         });
     })

@@ -5,6 +5,11 @@ const port = 3001;
 const routes = require("../routes/index");
 var MongoClient = require('mongodb').MongoClient;
 
+app.get('/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
