@@ -64,10 +64,10 @@ function getCardItems(items, filter){
     );    
 }
 
-async function makeRequest(type, url, data){
+async function makeRequest(type, url, data, useToken){
     if(url){
         if(type === GET){
-            return await getRequest(url);
+            return await getRequest(url, data, useToken);
         }
         else{
             return await postRequest(url, data);
@@ -97,25 +97,50 @@ function postRequest(url, data){
     })
 }
 
-function getRequest(url){
-    return new Promise(resolve => {
-        axios({
-            method: GET,
-            url: url
-        })
-        .catch(error => {
-            resolve(false);
-        })
-        .then(response => {
-            if (response && response.status === 200) {
-                let data = response.data;
-                if(data){
-                    resolve(data);
+function getRequest(url, data, useToken){
+    if(useToken){
+        return new Promise(resolve => {
+            axios({
+                method: GET,
+                url: url,
+                headers: {
+                    'Authorization': `token ${data}`
+                  }
+            })
+            .catch(error => {
+                resolve(false);
+            })
+            .then(response => {
+                if (response && response.status === 200) {
+                    let data = response.data;
+                    if(data){
+                        resolve(data);
+                    }
                 }
-            }
-        });
-    })
+            });
+        })
+    }
+    else {
+        return new Promise(resolve => {
+            axios({
+                method: GET,
+                url: url,
+            })
+            .catch(error => {
+                resolve(false);
+            })
+            .then(response => {
+                if (response && response.status === 200) {
+                    let data = response.data;
+                    if(data){
+                        resolve(data);
+                    }
+                }
+            });
+        })
+    }
 }
+    
 
 export default {
     getCardItems: getCardItems,

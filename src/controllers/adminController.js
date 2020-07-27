@@ -36,3 +36,6 @@ exports.login = async (req, res) => {
     }
 }
   
+exports.checkAuth = async (req, res) => {
+    res.send(200);
+}

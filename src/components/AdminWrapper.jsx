@@ -4,7 +4,8 @@ import helpers from '../helpers/helpers.js';
 import {requests} from '../helpers/constants.js';
 
 var makeRequest     = helpers.makeRequest,
-    POST            = requests.POST;
+    POST            = requests.POST,
+    GET             = requests.GET;
 
 class AdminFormWrapper extends Component {
     constructor(props){
@@ -18,13 +19,28 @@ class AdminFormWrapper extends Component {
     async onClick(e){
         let response = await makeRequest(POST, '/login', {username: "admin", password: "password"}),
             error    = response.error || false;
+
         if(!error){
-            console.log("NO ERROR");
+            let token = response.accessToken || '';
+            localStorage.setItem("token", token);
             this.setState({
                 loggedIn: true
             });
         } else {
             console.log(response.errorMsg);
+        }
+    }
+
+    async componentWillMount(){
+        let token = localStorage.getItem("token");
+        if(token){
+            let authed = await makeRequest(GET, "/isAuthed", token, true);
+            if(authed === "OK"){
+                this.setState({
+                    loggedIn: true
+                });
+                let items = await makeRequest(GET, "/adminItems", token, true);
+            }
         }
     }
 
